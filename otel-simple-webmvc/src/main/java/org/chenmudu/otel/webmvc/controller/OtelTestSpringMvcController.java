@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  *
  */
-package org.chenmudu.otel.restclient.controller;
+package org.chenmudu.otel.webmvc.controller;
 
 import io.opentelemetry.extension.annotations.WithSpan;
 import lombok.extern.slf4j.Slf4j;

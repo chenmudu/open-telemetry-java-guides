@@ -53,7 +53,8 @@ OTEL_EXPORTER_ZIPKIN_SERVICE_NAME = jvm instance name
 
 #### 测试服务列表
 
-* [Open-Telemetry-Java 示例工程（基于 Spring MVC 示例WebMvc）](otel-simple-webmvc)
+* [Open-Telemetry-Java 示例工程（基于 Spring   MVC 示例WebMvc）](otel-simple-webmvc)
+* [Open-Telemetry-Java 示例工程（基于 Rest Clients 示例RestClient）](otel-simple-restclient)
 
 #### 测试环境
 

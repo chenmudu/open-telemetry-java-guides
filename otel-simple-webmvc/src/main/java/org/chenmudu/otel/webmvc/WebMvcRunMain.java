@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  *
  */
-package org.chenmudu.otel.restclient;
+package org.chenmudu.otel.webmvc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
