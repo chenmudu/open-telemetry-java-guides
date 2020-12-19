@@ -20,6 +20,7 @@
 
 2. 下载[otel-javaagent.jar](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v0.12.0/opentelemetry-javaagent-all.jar)至磁盘目录下,[关于Latest release](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases) ，目前[最新版本为Beta 0.12.0](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/tag/v0.12.0)。
 
+
 #### 参数设置
 
 1. 设置VmOptions,指向磁盘中的otel-javaagent.jar的置放目录。
@@ -55,6 +56,7 @@ OTEL_EXPORTER_ZIPKIN_SERVICE_NAME = jvm instance name
 
 * [Open-Telemetry-Java 示例工程（基于 Spring   MVC 示例WebMvc）](otel-simple-webmvc)
 * [Open-Telemetry-Java 示例工程（基于 Rest Clients 示例RestClient）](otel-simple-restclient)
+* [Open-Telemetry-Java 示例工程（基于 Spring Webflux 示例WebFlux）](otel-simple-webflux)
 
 #### 测试环境
 
@@ -76,8 +78,10 @@ OTEL_EXPORTER_ZIPKIN_SERVICE_NAME = jvm instance name
 |---------------------------|--------------------------------|--------------------------|
 | Servlet                   | 4.0                            |Y                         |
 | WebMvc                    | 5.1.15                         |Y                         |
+| WebFlux                   | 5.1.15                         |Y                         |
 | RestTemplate(sync & async)| 5.1.15                         |N/Y(错当rest temeplate为http client. 且不支持 async resttemplate.)|
 | Apache Http Client(sync & async)  | 4.5.12/4.1.4            |Y                         |
 | Http-Url-Connection       | java8                          |Y                         |
 | okhttp(sync & async)      | 3.6.0                          |Y                         |
+| jdbc-mysql-connector      | 8.0.22                          |Y                        |
 | .......                   | .....                          |Y                         |
