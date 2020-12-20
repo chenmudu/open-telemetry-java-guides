@@ -2,7 +2,6 @@
 
 > Open-Telemetry-Java-Guides案例，用于测试常用中间件支持及Otel相关组件的使用情况。关于更多Otel请访问Otel官网。
 
-
 必读部分： [前言](#前言)、[环境准备](#环境准备)、[参数设置](#参数设置)，
 [启动测试服务](#启动测试服务)、[结果观测](#结果观测)、[测试服务列表](#测试服务列表)、[测试环境](#测试环境)、[测试库及框架列表](#测试库及框架列表).
 
@@ -16,9 +15,9 @@
 
 #### 环境准备
 
-1. 暂时不选择otel-collector，选择使用最小版Jaeger进行观测。关于[如何安装All in One](https://www.jaegertracing.io/docs/1.16/getting-started/)的Jaeger。
+1. 暂时不选择Otel-Collector，选择使用最小版Jaeger进行观测。关于[如何安装All in One](https://www.jaegertracing.io/docs/1.16/getting-started/)的Jaeger。
 
-2. 下载[otel-javaagent.jar](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v0.12.0/opentelemetry-javaagent-all.jar)至磁盘目录下,[关于Latest release](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases) ，目前[最新版本为Beta 0.12.0](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/tag/v0.12.0)。
+2. 下载[Otel-Javaagent.jar](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v0.12.0/opentelemetry-javaagent-all.jar)至磁盘目录下,[关于Latest release](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases) ，目前[最新版本为Beta 0.12.0](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/tag/v0.12.0)。
 
 
 #### 参数设置
@@ -27,7 +26,7 @@
 ```sh
 java -javaagent:path/to/opentelemetry-javaagent-all.jar
 ```
-2. 设置VmOptions,关于Exporter,otel默认为自己的OTLP Exporter,这里我们选择使用zipkin作为默认Exporter，其兼容jaeger的RestApi。使用Http方式上报至Jaeger的Collector中。
+2. 设置VmOptions,关于Exporter,otel默认为自己的OTLP Exporter,这里我们选择使用zipkin作为默认Exporter，其兼容jaeger的RestApi。使用Http方式上报至Jaeger的Collector中(也可以使用Otel-Collector)。
 ```sh
 -Dotel.exporter=zipkin
 ```
@@ -36,20 +35,27 @@ java -javaagent:path/to/opentelemetry-javaagent-all.jar
 OTEL_EXPORTER_ZIPKIN_SERVICE_NAME = jvm instance name
 ```
 
-4. 关于[otel官方参数设置。](https://github.com/open-telemetry/opentelemetry-java-instrumentation#getting-started)
+4. 关于[Otel官方参数设置。](https://github.com/open-telemetry/opentelemetry-java-instrumentation#getting-started)
 
+#### 关于Otel-Collector
+
+1. Docker/Windows 安装 Otel-Collector即可。
+
+2. 向Environment variable添加参数对：
+```sh
+OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
+```
+3. 关于[Otel-Collector-Design](https://github.com/open-telemetry/opentelemetry-collector/blob/master/docs/design.md)
 
 #### 启动测试服务
 
  git clone 当前项目. 选择测试的模块(确保[环境准备](#环境准备)、[参数设置](#参数设置)已经完成)。详情请进入子模块测试服务read me file,启动子模块。
  
- 
 #### 结果观测
 
-1. 确保[环境准备](#环境准备)、[参数设置](#参数设置)，
-[启动测试服务](#启动测试服务)已按步完成。
+1. 确保[环境准备](#环境准备)、[参数设置](#参数设置)，[启动测试服务](#启动测试服务)已按步完成。
 
-2. 访问JaegerUi即可观测结果，按步完成后UI默认地址为:http://localhost:16686/。
+2. 访问Jaeger-Ui即可观测结果，按步完成后UI默认地址为:http://localhost:16686/。
 
 
 #### 测试服务列表
@@ -57,6 +63,9 @@ OTEL_EXPORTER_ZIPKIN_SERVICE_NAME = jvm instance name
 * [Open-Telemetry-Java 示例工程（基于 Spring   MVC 示例WebMvc）](otel-simple-webmvc)
 * [Open-Telemetry-Java 示例工程（基于 Rest Clients 示例RestClient）](otel-simple-restclient)
 * [Open-Telemetry-Java 示例工程（基于 Spring Webflux 示例WebFlux）](otel-simple-webflux)
+* [Open-Telemetry-Java 示例工程（基于 Spring Rdb 示例Rdb）](otel-simple-rdb)
+* [Open-Telemetry-Java 示例工程（基于 Spring Async 示例Async）](otel-simple-async)
+* [Open-Telemetry-Java 示例工程（基于 Spring Data 示例Data系列）](otel-simple-data)
 
 #### 测试环境
 
@@ -80,8 +89,13 @@ OTEL_EXPORTER_ZIPKIN_SERVICE_NAME = jvm instance name
 | WebMvc                    | 5.1.15                         |Y                         |
 | WebFlux                   | 5.1.15                         |Y                         |
 | RestTemplate(sync & async)| 5.1.15                         |N/Y(错当rest temeplate为http client. 且不支持 async resttemplate.)|
-| Apache Http Client(sync & async)  | 4.5.12/4.1.4            |Y                         |
-| Http-Url-Connection       | java8                          |Y                         |
-| okhttp(sync & async)      | 3.6.0                          |Y                         |
-| jdbc-mysql-connector      | 8.0.22                          |Y                        |
+| ApacheHttpClient(sync & async)  | 4.5.12/4.1.4            |Y                         |
+| HttpUrlConnection         | java8                          |Y                         |
+| OkHttp(sync & async)      | 3.6.0                          |Y                         |
+| JdbcMysqlConnector        | 8.0.22                          |Y                        |
+| Spring-Data-Jdbc          | 2.1.14                          |Y                        |
+| Spring-Data-Jpa           | 2.1.14                          |Y                        |
+| Spring-Data-Rest          | 2.1.14                          |Y                        |
+| Spring-Data-Mongo         | 2.1.14                          |Y                        |
+| Spring-data-Redis         | 2.1.14                          |Y                        |
 | .......                   | .....                          |Y                         |

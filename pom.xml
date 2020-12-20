@@ -20,6 +20,7 @@
     <properties>
         <hutool.version>5.5.2</hutool.version>
         <java.version>1.8</java.version>
+        <jedis.version>2.9.0</jedis.version>
         <lombok.version>1.18.12</lombok.version>
         <mysql-java.version>8.0.22</mysql-java.version>
         <okhttp.version>3.6.0</okhttp.version>
@@ -32,6 +33,7 @@
         <module>otel-simple-async</module>
         <module>otel-simple-rdb</module>
         <module>otel-simple-restclient</module>
+        <module>otel-simple-spring-data</module>
         <module>otel-simple-webflux</module>
         <module>otel-simple-webmvc</module>
     </modules>
@@ -99,10 +101,54 @@
                 <version>${springboot.version}</version>
             </dependency>
 
+
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-mongodb</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${springboot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.lettuce</groupId>
+                        <artifactId>lettuce-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--test for jedis.-->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jdbc</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-rest</artifactId>
+                <version>${springboot.version}</version>
             </dependency>
 
         </dependencies>

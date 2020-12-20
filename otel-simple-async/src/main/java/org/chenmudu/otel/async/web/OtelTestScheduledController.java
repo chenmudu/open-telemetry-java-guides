@@ -29,12 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class OtelTestScheduledController {
 
-
     /**
      * "io.opentelemetry.javaagent.spring-scheduling"
      */
     @Scheduled(cron = "*/10 * * * * ?")
-    public void pushDataScheduled(){
+    public void pushDataScheduled() {
         log.info("start push data scheduled!");
         log.info("scheduled scheduled scheduled scheduled scheduled!!!!!");
         log.info("end push data scheduled!");

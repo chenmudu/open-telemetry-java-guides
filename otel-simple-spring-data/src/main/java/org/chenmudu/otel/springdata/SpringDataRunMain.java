@@ -1,7 +1,7 @@
 /**
  * MIT License
  * <p>
- * Copyright (c) 2020 chenmudu (陈晨)
+ * Copyright (c) 2019 chenmudu (陈晨)
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -12,20 +12,19 @@
  * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
+ *
  */
-package org.chenmudu.otel.rdb;
+package org.chenmudu.otel.springdata;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- *
- * @author chenmudu@gmail.com   2020/12/14 23:06
+ * RunMain for spring data.
  */
 @SpringBootApplication
-public class RdbRunMain {
-
+public class SpringDataRunMain {
     public static void main(String[] args) {
-        SpringApplication.run(RdbRunMain.class, args);
+        SpringApplication.run(SpringDataRunMain.class);
     }
 }

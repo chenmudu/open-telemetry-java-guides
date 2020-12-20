@@ -2,6 +2,14 @@
 
 > Open-Telemetry-Simple-RestClient 实际测试了日常主流所用的Rest Client相关。
 
+- HttpUrlConnection
+
+- ApacheHttpClient(aysnc & sync)
+
+- RestTemplate(async & sync)
+
+- OkHttp(async & sync)
+
 ##### 测试模块快速开始
 
 1. 确保[Guides 案例工程下的步骤](../README.md)执行完毕。

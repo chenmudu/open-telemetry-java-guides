@@ -13,19 +13,23 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
-package org.chenmudu.otel.rdb;
+package org.chenmudu.otel.springdata.repository;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.chenmudu.otel.springdata.entity.UserInfoTable;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
+ * spring-data-rest-api + jpa：
  *
- * @author chenmudu@gmail.com   2020/12/14 23:06
+ * io.opentelemetry.javaagent.servlet
+ *
+ * io.opentelemetry.javaagent.spring-webmvc
+ *
+ * io.opentelemetry.javaagent.spring-data
+ *
+ * io.opentelemetry.javaagent.jdbc
+ *
+ * @author chenmudu@gmail.com   2020/12/20 22:05
  */
-@SpringBootApplication
-public class RdbRunMain {
-
-    public static void main(String[] args) {
-        SpringApplication.run(RdbRunMain.class, args);
-    }
+public interface UserRepository extends JpaRepository<UserInfoTable, Integer> {
 }

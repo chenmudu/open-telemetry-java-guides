@@ -36,7 +36,6 @@ public class OtelTestRdbController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-
     /**
      *"io.opentelemetry.auto.jdbc“
      *

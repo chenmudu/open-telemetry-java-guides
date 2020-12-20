@@ -13,19 +13,29 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
-package org.chenmudu.otel.rdb;
+package org.chenmudu.otel.springdata.entity;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import lombok.Data;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
- * @author chenmudu@gmail.com   2020/12/14 23:06
+ *
+ * @author chenmudu@gmail.com   2020/12/20 21:50
  */
-@SpringBootApplication
-public class RdbRunMain {
+@Entity
+@Table(name = "userinfo")
+@Data
+public class UserInfoTable {
 
-    public static void main(String[] args) {
-        SpringApplication.run(RdbRunMain.class, args);
-    }
+    @Id
+    @Column(name = "userId")
+    private Integer userId;
+
+    @Column(name = "userName")
+    private String  userName;
 }

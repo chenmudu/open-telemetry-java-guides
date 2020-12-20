@@ -31,7 +31,8 @@ public class OtelTestAsyncServiceImpl implements OtelTestAsyncService {
     @Async
     @Override
     public String calledAsync() {
-        log.info("OtelTestAsyncServiceImpl calledAsync thread is : {}", Thread.currentThread().getName());
+        log.info("OtelTestAsyncServiceImpl calledAsync thread is : {}", Thread.currentThread()
+            .getName());
         return "calledAsync";
     }
 }

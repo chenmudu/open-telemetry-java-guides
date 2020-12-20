@@ -13,19 +13,23 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
-package org.chenmudu.otel.rdb;
+package org.chenmudu.otel.springdata.entity;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  *
- * @author chenmudu@gmail.com   2020/12/14 23:06
+ * @author chenmudu@gmail.com   2020/12/20 12:04
  */
-@SpringBootApplication
-public class RdbRunMain {
+@Data
+@Document(collection = "userInfoDocument")
+public class UserInfoDocument {
+    @Id
+    private String  _id;
 
-    public static void main(String[] args) {
-        SpringApplication.run(RdbRunMain.class, args);
-    }
+    private String  name;
+
+    private Integer age;
 }

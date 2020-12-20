@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OtelTestAsyncController implements ApplicationContextAware {
 
-    private ApplicationContext applicationContext;
+    private ApplicationContext   applicationContext;
 
     @Autowired
     private OtelTestAsyncService otelTestAsyncService;
@@ -45,22 +45,23 @@ public class OtelTestAsyncController implements ApplicationContextAware {
 
         otelTestAsyncService.calledAsync();
 
-//        this.testCalledAsync();
+        //        this.testCalledAsync();
 
         this.applicationContext.getBean(OtelTestAsyncController.class).testCalledAsyncByProxy();
 
         return "async";
     }
 
-//    @Async
-//    public String testCalledAsync() {
-//        log.info("OtelTestAsyncController testCalledAsync thread name : {}", Thread.currentThread().getName());
-//        return "testCalledAsync";
-//    }
+    //    @Async
+    //    public String testCalledAsync() {
+    //        log.info("OtelTestAsyncController testCalledAsync thread name : {}", Thread.currentThread().getName());
+    //        return "testCalledAsync";
+    //    }
 
     @Async
     public String testCalledAsyncByProxy() {
-        log.info("OtelTestAsyncController testCalledAsyncByProxy thread name : {}", Thread.currentThread().getName());
+        log.info("OtelTestAsyncController testCalledAsyncByProxy thread name : {}", Thread
+            .currentThread().getName());
         return "testCalledAsyncByProxy";
     }
 
