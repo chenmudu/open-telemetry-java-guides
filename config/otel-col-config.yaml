@@ -1,0 +1,44 @@
+extensions:
+  health_check:
+  pprof:
+    endpoint: 0.0.0.0:1777
+  zpages:
+    endpoint: 0.0.0.0:55679
+### agent ---> otel receivers(多个) --->pipelines(自由组合) ---> exporter(多个)
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  batch:
+
+exporters:
+  logging:
+    logLevel: INFO
+  jaeger:
+    endpoint: 0.0.0.0:14250
+    insecure: true
+  file:
+    path: ./otel-col-test-data.json
+  prometheusremotewrite:
+    endpoint: "http://172.20.10.2:9998"
+    namespace: "otel-collector-metrics-space"
+    insecure: true
+
+service:
+
+  pipelines:
+
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, file, jaeger]
+
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, file, prometheusremotewrite]
+
+  extensions: [health_check, pprof, zpages]

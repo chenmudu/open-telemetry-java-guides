@@ -65,13 +65,16 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 * [Open-Telemetry-Java 示例工程（基于 Spring Webflux 示例WebFlux）](otel-simple-webflux)
 * [Open-Telemetry-Java 示例工程（基于 Spring Rdb 示例Rdb）](otel-simple-rdb)
 * [Open-Telemetry-Java 示例工程（基于 Spring Async 示例Async）](otel-simple-async)
-* [Open-Telemetry-Java 示例工程（基于 Spring Data 示例Data系列）](otel-simple-data)
+* [Open-Telemetry-Java 示例工程（基于 Spring Data 示例Data系列）](otel-simple-spring-data)
+* [Open-Telemetry-Java 示例工程（关于 Otel Collector 个人配置参考）](https://github.com/chenmudu/open-telemetry-java-guides/tree/master/config)
 
 #### 测试环境
 
 - JDK Version: 1.8.0_171
 
-- Otel Agent Version: 0.12.0
+- Otel Java Agent Version: 0.12.0
+
+- Otel Collector Version: 0.16.0
 
 - Maven Version: 3.3.9
 
@@ -81,6 +84,7 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 
 - JVM Info: Java HotSpot(TM) 64-Bit Server VM (25.171-b11, mixed mode)
 
+- Others：Prometheus, Jaeger...
 #### 测试库及框架列表
 
 | Library/Framework         | Versions                       |Test Result               |

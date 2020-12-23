@@ -150,6 +150,18 @@
                 <artifactId>spring-boot-starter-data-rest</artifactId>
                 <version>${springboot.version}</version>
             </dependency>
+            <!--prometheus-->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
