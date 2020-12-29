@@ -20,7 +20,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.chenmudu.otel.springdata.entity.UserInfoDocument;
+import org.chenmudu.otel.springdata.entity.UserInfoEsDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -38,20 +40,24 @@ import java.util.Map;
 public class OtelTestSpringDataController {
 
     @Autowired
-    private MongoTemplate mongoTemplate;
+    private MongoTemplate         mongoTemplate;
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate         redisTemplate;
 
     @Autowired
-    private JdbcTemplate  jdbcTemplate;
+    private JdbcTemplate          jdbcTemplate;
+
+    @Autowired
+    private ElasticsearchTemplate esTemplate;
 
     @GetMapping("/springData")
     public String springData() {
         log.info("OtelTestSpringMvcController hello started!");
         //        this.dataMongoTest();
         //        this.dataRedisTest();
-        this.dataJdbcTest();
+        //        this.dataJdbcTest();
+        this.dataCreateElasticSearchIndex();
         return "OtelTestSpringMvcController hello !";
     }
 
@@ -60,9 +66,9 @@ public class OtelTestSpringDataController {
      * "io.opentelemetry.javaagent.mongo"
      */
     private JsonNode dataMongoTest() {
-        UserInfoDocument userInfo = new UserInfoDocument();
-        userInfo.setName("cchen");
-        userInfo.setAge(22);
+        //        UserInfoDocument userInfo = new UserInfoDocument();
+        //        userInfo.setName("cchen");
+        //        userInfo.setAge(22);
         //        UserInfoDocument insertUserInfo = mongoTemplate.save(userInfo);
         //        log.info("current onsert user info values : {}", insertUserInfo);
         List<UserInfoDocument> all = mongoTemplate.findAll(UserInfoDocument.class);
@@ -86,6 +92,17 @@ public class OtelTestSpringDataController {
         Map<String, Object> map = jdbcTemplate.queryForMap("select * from userinfo");
         JsonNode jsonNode = new ObjectMapper().valueToTree("123");
         log.info("data jdbc query result is : {}", jsonNode);
+    }
+
+    /**
+     * ”io.opentelemetry.javaagent.elasticsearch“
+     */
+    private String dataCreateElasticSearchIndex() {
+        boolean indexFlag = esTemplate.createIndex(UserInfoEsDocument.class);
+        log.info("dataElasticsearch create index result : {}", indexFlag);
+        boolean putFlag = esTemplate.putMapping(UserInfoEsDocument.class);
+        log.info("dataElasticsearch put index result : {}", putFlag);
+        return indexFlag + " ==== " + putFlag;
     }
 
 }

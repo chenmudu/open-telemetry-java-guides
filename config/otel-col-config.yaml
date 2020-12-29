@@ -18,7 +18,7 @@ exporters:
   logging:
     logLevel: INFO
   jaeger:
-    endpoint: 0.0.0.0:14250
+    endpoint: 0.0.0.0:14250  ## 这里的0.0.0.0 如果是docker 内的collector应当配成你的ip,如果是 windows 下的otel则都可以。
     insecure: true
   file:
     path: ./otel-col-test-data.json

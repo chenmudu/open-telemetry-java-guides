@@ -74,7 +74,9 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 
 - Otel Java Agent Version: 0.12.0
 
-- Otel Collector Version: 0.16.0
+- Otel Collector Win10 Version: 0.16.0
+
+- Otel Collector Docker Version: 0.16.0-Dev
 
 - Maven Version: 3.3.9
 
@@ -82,9 +84,12 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 
 - OS Version: Win10
 
+- Docker Version: 19.03.13
+
 - JVM Info: Java HotSpot(TM) 64-Bit Server VM (25.171-b11, mixed mode)
 
-- Others：Prometheus, Jaeger...
+- Others：Prometheus, Prometheus Gateway, Jaeger All In One, Grafana ...
+
 #### 测试库及框架列表
 
 | Library/Framework         | Versions                       |Test Result               |
@@ -97,9 +102,11 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 | HttpUrlConnection         | java8                          |Y                         |
 | OkHttp(sync & async)      | 3.6.0                          |Y                         |
 | JdbcMysqlConnector        | 8.0.22                          |Y                        |
-| Spring-Data-Jdbc          | 2.1.14                          |Y                        |
-| Spring-Data-Jpa           | 2.1.14                          |Y                        |
-| Spring-Data-Rest          | 2.1.14                          |Y                        |
-| Spring-Data-Mongo         | 2.1.14                          |Y                        |
-| Spring-data-Redis         | 2.1.14                          |Y                        |
+| Spring-Data-Jdbc          | 2.1.14(1.0.17.RELEASE)                          |Y                        |
+| Spring-Data-Jpa           | 2.1.14(2.1.17.RELEASE)                         |Y                        |
+| Spring-Data-Rest          | 2.1.14(3.1.17.RELEASE)                          |Y                        |
+| Spring-Data-Mongo         | 2.1.14(2.1.17.RELEASE)                          |Y                        |
+| Spring-data-Redis         | 2.1.14(2.1.17.RELEASE)                          |Y                        |
+| Spring-data-Es            | 2.1.14(3.1.17.RELEASE)                          |Y                        |
+| Spring-data-Neo4j         | 2.1.14(5.1.17.RELEASE)                          |N 还未测试                        |
 | .......                   | .....                          |Y                         |

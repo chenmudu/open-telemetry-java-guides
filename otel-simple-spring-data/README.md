@@ -1,6 +1,7 @@
 ### Open-Telemetry-Simple-SpringData 案例工程
 
 > Open-Telemetry-Simple-SpringData 实际测试了Spring-Data下主流中间件的使用。
+
 - spring-data-jpa
 
 - spring-data-jdbc
@@ -10,6 +11,8 @@
 - spring-data-redis(lettuce/jedis)
 
 - spring-data-mongo
+
+- spring-data-elasticsearch
 
 
 ##### 测试模块快速开始
