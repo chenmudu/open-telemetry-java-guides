@@ -1,5 +1,5 @@
 extensions:
-  health_check:
+  health_check: 0.0.0.0:13313
   pprof:
     endpoint: 0.0.0.0:1777
   zpages:
