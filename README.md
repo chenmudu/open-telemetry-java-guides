@@ -5,6 +5,9 @@
 必读部分：[数据展示](#数据展示)、 [前言](#前言)、[环境准备](#环境准备)、[参数设置](#参数设置)，
 [启动测试服务](#启动测试服务)、[结果观测](#结果观测)、[测试服务列表](#测试服务列表)、[测试环境](#测试环境)、[测试库及框架列表](#测试库及框架列表).
 
+> 🔈：希望各位先fork，后clone,这样关于我新提交的东西您就可以观测到。如果仅仅clone，我的最新提交您可能感知不到。
+个人无偿测试和搭建不易，麻烦赏颗星星，感谢您。🙇‍。
+
 #### 数据展示
 
 Otel-Col Info By ItSelf :
@@ -30,12 +33,9 @@ App-Jvm-Metrics Info By Prometheus And Prometheus Gateway:
 
 - 搭建最小测试版的guides服务，仅仅是为了体验和测试Otel，故此数据仅存于内存中。
 
-- O~~tel-Agent --> Exporter Wrapper --> Zipkin-Exporter --> Jaeger-Collector ---> Jaeger Query --> UI~~
+- arch: ![avatar](image/otel-guides-arch.png)
 
-                                                                                                                                         |--> Prometheus -->|         | --> Prometheus-Ui
-    - Otel-Java-Agent --> Otel-Agent-Exporter  --> Otel-Col-Receiver[i] --> Otel-Col-Pipeline(processor) --> Otel-Col-Exporter  -->[i]   |                  | --> 展示 | --> Grafana-Ui
-                                                                                                                                         |--> Jaeger     -->|         | --> Jaeger-Ui
-    #### 环境准备
+#### 环境准备
 
 1. ~~暂时不~~选择Otel-Collector，选择使用最小版Jaeger进行观测。关于[如何安装All in One](https://www.jaegertracing.io/docs/1.16/getting-started/)的Jaeger。
 
@@ -43,7 +43,7 @@ App-Jvm-Metrics Info By Prometheus And Prometheus Gateway:
 
 3. 拉取[Otel-Col-Docker-Image](https://hub.docker.com/search?q=otel&type=image).
 
-4. 关于docker 相关安装请移步[这儿](https://github.com/chenmudu/open-telemetry-java-guides/tree/master/config/others.properties)
+4. 关于docker 安装相关组件请移步[这儿](https://github.com/chenmudu/open-telemetry-java-guides/tree/master/config/others.properties)
 
 #### 参数设置
 
@@ -51,7 +51,7 @@ App-Jvm-Metrics Info By Prometheus And Prometheus Gateway:
 ```sh
 java -javaagent:path/to/opentelemetry-javaagent-all.jar
 ```
-2. 设置VmOptions,关于Exporter,otel默认为自己的OTLP Exporter,这里我们选择使用zipkin作为默认Exporter，其兼容jaeger的RestApi。使用Http方式上报至Jaeger的Collector中(也可以使用Otel-Collector)。
+2. 设置VmOptions,关于Exporter,otel默认为自己的OTLP Exporter,这里我们选择~~使用zipkin作为默认Exporter，其兼容jaeger的RestApi。使用Http方式上报至Jaeger的Collector中(~~也可以使用Otel-Collector~~)~~。
 ```sh
 -Dotel.exporter=zipkin
 ```
@@ -142,4 +142,4 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 
 - 在每条业务架设对应的Otel-Col-Gateway去做总收集较为妥当(划分依据参考自身业务)。
 
-- 至于更大的集群模式，请自行尝试。暂时切莫用于生产，待官方发布GA版本，个人将尝试。
+- 至于更大的集群模式，请自行尝试。暂时切莫用于生产，待官方发布GA版本，个人将预先尝试。
