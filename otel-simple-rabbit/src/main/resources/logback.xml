@@ -1,0 +1,15 @@
+<configuration>
+    <jmxConfigurator/>
+    <property name="charset" value="UTF-8" />
+    <property name="pattern"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] - [%X{traceId},%X{spanId}]- %logger{30}.%method:%line  %msg%n" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

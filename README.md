@@ -53,11 +53,12 @@ java -javaagent:path/to/opentelemetry-javaagent-all.jar
 ```
 2. 设置VmOptions,关于Exporter,otel默认为自己的OTLP Exporter,这里我们选择~~使用zipkin作为默认Exporter，其兼容jaeger的RestApi。使用Http方式上报至Jaeger的Collector中(~~也可以使用Otel-Collector~~)~~。
 ```sh
+// 省略此步骤，当你使用Otel-Collector的时候。
 -Dotel.exporter=zipkin
 ```
 3. 向Environment variable添加参数对：
 ```sh
-OTEL_EXPORTER_ZIPKIN_SERVICE_NAME = jvm instance name
+OTEL_RESOURCE_ATTRIBUTES=service.name=otel-simple-moudlename
 ```
 
 4. 关于[Otel官方参数设置。](https://github.com/open-telemetry/opentelemetry-java-instrumentation#getting-started)
@@ -91,6 +92,8 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 * [Open-Telemetry-Java 示例工程（基于 Spring Rdb 示例Rdb）](otel-simple-rdb)
 * [Open-Telemetry-Java 示例工程（基于 Spring Async 示例Async）](otel-simple-async)
 * [Open-Telemetry-Java 示例工程（基于 Spring Data 示例Data系列）](otel-simple-spring-data)
+* [Open-Telemetry-Java 示例工程（基于 Spring Amqp 示例RabbitMq）](otel-simple-rabbit)
+* [Open-Telemetry-Java 示例工程（基于 Spring Kafka 示例KafkaMq）](otel-simple-kafka)
 * [Open-Telemetry-Java 示例工程（关于 Otel Collector 个人配置参考）](https://github.com/chenmudu/open-telemetry-java-guides/tree/master/config/otel-col-config.yaml)
 
 #### 测试环境
@@ -117,24 +120,31 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 
 #### 测试库及框架列表
 
-| Library/Framework         | Versions                       |Test Result               |
-|---------------------------|--------------------------------|--------------------------|
-| Servlet                   | 4.0                            |Y                         |
-| WebMvc                    | 5.1.15                         |Y                         |
-| WebFlux                   | 5.1.15                         |Y                         |
-| RestTemplate(sync & async)| 5.1.15                         |N/Y(错当rest temeplate为http client. 且不支持 async resttemplate.)|
-| ApacheHttpClient(sync & async)  | 4.5.12/4.1.4            |Y                         |
-| HttpUrlConnection         | java8                          |Y                         |
-| OkHttp(sync & async)      | 3.6.0                          |Y                         |
-| JdbcMysqlConnector        | 8.0.22                          |Y                        |
-| Spring-Data-Jdbc          | 2.1.14(1.0.17.RELEASE)                          |Y                        |
-| Spring-Data-Jpa           | 2.1.14(2.1.17.RELEASE)                         |Y                        |
-| Spring-Data-Rest          | 2.1.14(3.1.17.RELEASE)                          |Y                        |
-| Spring-Data-Mongo         | 2.1.14(2.1.17.RELEASE)                          |Y                        |
-| Spring-data-Redis         | 2.1.14(2.1.17.RELEASE)                          |Y                        |
-| Spring-data-Es            | 2.1.14(3.1.17.RELEASE)                          |Y                        |
-| Spring-data-Neo4j         | 2.1.14(5.1.17.RELEASE)                          |N 还未测试                        |
-| .......                   | .....                          |Y                         |
+| Library/Framework         | Versions                       |Test Result               |官方最低版本支持   |
+|---------------------------|--------------------------------|--------------------------|-----------------|
+| Servlet                   | 4.0                            |Y                         |      2.2+       |
+| WebMvc                    | 5.1.15                         |Y                         |      3.1+       |
+| WebFlux                   | 5.1.15                         |Y                         |      5.0+       |
+| RestTemplate(sync & async)| 5.1.15                         |N/Y(错当rest temeplate为http client. 且不支持 async resttemplate.)故此推荐，如果生产使用RestTemplate，将其底层替换为HttpClient，包括连接池、其他参数等| 官方无支持|
+| ApacheHttpClient(sync & async)  | 4.5.12/4.1.4             |Y                         |      2.0+/1.9+ (not including 2.x yet)|
+| HttpUrlConnection         | java8                          |Y                         |      Java 7+    |
+| OkHttp(sync & async)      | 3.6.0                          |Y                         |      3.0+       |
+| JdbcMysqlConnector        | 8.0.22                         |Y                         |      无         |
+| Spring-Data-Jdbc          | 2.1.14(1.0.17.RELEASE)         |Y                         |      1.8+       |
+| Spring-Data-Jpa           | 2.1.14(2.1.17.RELEASE)         |Y                         |      1.8+       |
+| Spring-Data-Rest          | 2.1.14(3.1.17.RELEASE)         |Y                         |      1.8+       |
+| Spring-Data-Mongo         | 2.1.14(2.1.17.RELEASE)         |Y                         |      1.8+       |
+| Spring-data-Redis         | 2.1.14(2.1.17.RELEASE)         |Y                         |      1.8+       |
+| lettuce-core              | 5.1.8.RELEASE                  |Y                         |      4.0+ (not including 6.x yet)      |
+| Jedis-Client              | 2.9.0                          |Y                         |      1.4+       |
+| Redisson-Client           | 0.0.0                          |N 还未测试                  |      3.0+      |
+| Spring-data-Es            | 2.1.14(3.1.17.RELEASE)         |Y                         |      1.8+       |
+| Spring-data-Neo4j         | 2.1.14(5.1.17.RELEASE)         |N 还未测试                  |      1.8+       |
+| Spring-Rabbit             | 2.1.14(2.1.14.RELEASE)         |Y                         |      无         |
+| Rabbit-Client             | 5.4.3                          |Y                         |      2.7+       |
+| Spring-Kafka              | 2.1.13                         |Y                         |      无         |
+| Kafka-Client              | 2.0.1                          |Y                         |      0.11+      |
+| .......                   | .....                          |Y                         | |
 
 #### 关于其他
 
