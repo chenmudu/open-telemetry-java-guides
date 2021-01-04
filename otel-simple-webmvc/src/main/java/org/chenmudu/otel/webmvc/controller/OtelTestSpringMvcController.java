@@ -29,8 +29,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OtelTestSpringMvcController {
 
-    private Integer counter = 0;
-
     @GetMapping("/hello")
     public String hello() {
         log.info("OtelTestSpringMvcController hello started!");
@@ -41,9 +39,6 @@ public class OtelTestSpringMvcController {
     @WithSpan(value = "testCalledHi")
     private String calledHi() {
         log.info("OtelTestSpringMvcController calledHi started!");
-        if(counter++ % 2 == 1) {
-            int i = 1 /0 ;
-        }
         return "calledHi";
     }
 }

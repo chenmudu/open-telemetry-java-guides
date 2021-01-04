@@ -41,8 +41,8 @@ public class OtelTestTailBaseController {
     private String calledHi() {
         log.info("OtelTestTailBaseController calledHi started!");
         // 当你配置了tail_base采样规则时即可生效。
-        if(counter++ % 2 == 1) {
-            int i = 1 /0 ;
+        if (counter++ % 2 == 1) {
+            int i = 1 / 0;
         }
         return "calledHi";
     }
