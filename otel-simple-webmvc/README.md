@@ -11,3 +11,7 @@
 3. 访问http://localhost:10001/hello。
 
 4. Copy Console 中的 TraceId访问 http://localhost:16686/ 即可观测结果。
+
+##### 注意
+
+1. 当你使用想观测

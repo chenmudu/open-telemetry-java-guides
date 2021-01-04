@@ -31,13 +31,15 @@
 
     <modules>
         <module>otel-simple-async</module>
+        <module>otel-simple-kafka</module>
         <module>otel-simple-rabbit</module>
         <module>otel-simple-rdb</module>
         <module>otel-simple-restclient</module>
         <module>otel-simple-spring-data</module>
+        <module>otel-simple-tailbase</module>
         <module>otel-simple-webflux</module>
         <module>otel-simple-webmvc</module>
-        <module>otel-simple-kafka</module>
+        <module>otel-simple-tailbase</module>
     </modules>
 
     <dependencyManagement>

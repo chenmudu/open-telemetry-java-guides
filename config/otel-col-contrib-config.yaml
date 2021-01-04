@@ -1,0 +1,62 @@
+extensions:
+  health_check:
+  pprof:
+    endpoint: 0.0.0.0:1777
+  zpages:
+    endpoint: 0.0.0.0:55679
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+  
+
+processors:
+  batch:
+    send_batch_size: 10000
+    send_batch_max_size: 10240
+    timeout: 5s
+
+  tail_sampling:
+    decision_wait: 50s
+    num_traces: 200
+    expected_new_traces_per_sec: 10
+    policies:
+      [
+          {
+            name: test-policy-1,
+            type: numeric_attribute, ## 因为 min_value, max_value是闭区间。[201, 999]
+            numeric_attribute: {key: http.status_code, min_value: 201, max_value: 999}
+          }
+      ]
+
+exporters:
+  logging:
+    logLevel: DEBUG
+    sampling_initial: 5
+    sampling_thereafter: 200
+  jaeger:
+    endpoint: 192.168.2.6:14250
+    insecure: true
+  prometheusremotewrite:
+    endpoint: "http://192.168.2.6:9998"
+    namespace: "otel-collector-metrics-space"
+    insecure: true
+
+service:
+
+  pipelines:
+
+    traces:
+      receivers: [otlp]
+      processors: [tail_sampling]
+      exporters: [logging, jaeger]
+
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, prometheusremotewrite]
+
+  extensions: [health_check, pprof, zpages]

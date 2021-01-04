@@ -22,10 +22,15 @@ App-Jvm-Metrics Info By Prometheus And Prometheus Gateway:
 
 ![avatar](image/app-jvm-metrics.png)
 
-关于业务日志, 借助对应的日志框架实现自定义即可。
-例如LogBack，自定义其Layout以及Appender， 借助第三方例如Kafka，将数据exporter至当前Otel-Col即可。
+- 关于业务日志, 借助对应的日志框架实现自定义即可，后将数据对接至Otel-Collector即可。
 
-中心化管控：Biz Logging, Trace, Metrics 较为方便。还未尝试Otel让 个人 最惊喜的Tail-Base-Smaple规则。
+- 中心化管控：Biz Logging, Trace, Metrics 较为方便。~~还未尝试Otel让 个人 最惊喜的Tail-Base-Smaple规则。~~
+
+- 关于Otel-Col的Tailed Base采样已尝鲜，值得注意的是，该功能的局限性：
+    
+    1. 基于尾部采样仅仅适合在单个 Collector 内可成功运行，多个Collector之间组成的集群官方及个人均未测试。
+    
+    1. 基于尾部采样的规则，目前仅仅适用于Trace，其实个人觉得更重要的是业务的Logging数据。
 
 #### 前言 
 
@@ -87,6 +92,7 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 #### 测试服务列表
 
 * [Open-Telemetry-Java 示例工程（基于 Spring   MVC 示例WebMvc）](otel-simple-webmvc)
+* [Open-Telemetry-Java 示例工程（基于 Spring   MVC 示例Tail Based采样）](otel-simple-tailbase)
 * [Open-Telemetry-Java 示例工程（基于 Rest Clients 示例RestClient）](otel-simple-restclient)
 * [Open-Telemetry-Java 示例工程（基于 Spring Webflux 示例WebFlux）](otel-simple-webflux)
 * [Open-Telemetry-Java 示例工程（基于 Spring Rdb 示例Rdb）](otel-simple-rdb)
@@ -105,6 +111,8 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 - Otel Collector Win10 Version: 0.16.0
 
 - Otel Collector Docker Version: 0.16.0-Dev
+
+- Otel Collector Contrib Docker Version: 0.17.0-Dev
 
 - Maven Version: 3.3.9
 
