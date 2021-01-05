@@ -14,4 +14,6 @@
 
 ##### 注意
 
-1. 当你使用想观测
+1. 保证当前Otel-Col-Contrib已启动，[关于脚本](https://github.com/chenmudu/open-telemetry-java-guides/blob/master/config/others.properties)。
+
+1. 保证当前Otel-Col-Contrib的配置符合你的需求，详情查看[我的配置](https://github.com/chenmudu/open-telemetry-java-guides/blob/master/config/otel-col-contrib-config.yaml)。
