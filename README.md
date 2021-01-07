@@ -34,7 +34,7 @@ App-Jvm-Metrics Info By Prometheus And Prometheus Gateway:
 
 #### 前言 
 
-- Open Template(下面简称Otel)[相关资料及文档](https://opentelemetry.io/docs/java/getting_started/)。
+- Open Telemetry(下面简称 Otel(与Open Tracing 的Ot做区分))[相关资料及文档](https://opentelemetry.io/docs/java/getting_started/)。
 
 - 搭建最小测试版的guides服务，仅仅是为了体验和测试Otel，故此数据仅存于内存中。
 
