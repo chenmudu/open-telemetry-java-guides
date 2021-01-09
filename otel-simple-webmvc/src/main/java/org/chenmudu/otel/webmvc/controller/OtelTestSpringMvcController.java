@@ -29,9 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OtelTestSpringMvcController {
 
-    @GetMapping("/hello")
-    public String hello() {
-        log.info("OtelTestSpringMvcController hello started!");
+    @GetMapping("/webmvc")
+    public String webmvc() {
+        log.info("OtelTestSpringMvcController webmvc started!");
         this.calledHi();
         return "OtelTestSpringMvcController hello !";
     }

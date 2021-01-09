@@ -64,6 +64,12 @@
 
             <dependency>
                 <groupId>io.opentelemetry</groupId>
+                <artifactId>opentelemetry-api</artifactId>
+                <version>${otel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.opentelemetry</groupId>
                 <artifactId>opentelemetry-extension-annotations</artifactId>
                 <version>${otel.version}</version>
             </dependency>

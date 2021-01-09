@@ -31,7 +31,7 @@ public class OtelTestWebFluxController {
 
     /**
      * io.opentelemetry.javaagent.netty(servlet 容器变成了netty 容器。)
-     * io.opentelemetry.javaagent.spring-webflux (web-mvc变成了webflus)
+     * io.opentelemetry.javaagent.spring-webflux (web-mvc变成了webflux)
      *
      * @return string.
      */

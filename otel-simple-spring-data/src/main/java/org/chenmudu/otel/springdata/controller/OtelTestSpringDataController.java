@@ -53,7 +53,7 @@ public class OtelTestSpringDataController {
 
     @GetMapping("/springData")
     public String springData() {
-        log.info("OtelTestSpringMvcController hello started!");
+        log.info("OtelTestSpringMvcController springData started!");
         //        this.dataMongoTest();
         //        this.dataRedisTest();
         //        this.dataJdbcTest();
