@@ -39,6 +39,7 @@
         <module>otel-simple-tailbase</module>
         <module>otel-simple-webflux</module>
         <module>otel-simple-webmvc</module>
+        <module>otel-simple-neo4j</module>
     </modules>
 
     <dependencyManagement>

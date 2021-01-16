@@ -100,6 +100,7 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 * [Open-Telemetry-Java 示例工程（基于 Spring Data 示例Data系列）](otel-simple-spring-data)
 * [Open-Telemetry-Java 示例工程（基于 Spring Amqp 示例RabbitMq）](otel-simple-rabbit)
 * [Open-Telemetry-Java 示例工程（基于 Spring Kafka 示例KafkaMq）](otel-simple-kafka)
+* [Open-Telemetry-Java 示例工程（基于 Spring Neo4j 示例Neo4j）](otel-simple-neo4j)
 * [Open-Telemetry-Java 示例工程（关于 Otel Collector 个人配置参考）](https://github.com/chenmudu/open-telemetry-java-guides/tree/master/config/otel-col-config.yaml)
 
 #### 测试环境
@@ -147,7 +148,7 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 | Jedis-Client              | 2.9.0                          |Y                         |      1.4+       |
 | Redisson-Client           | 0.0.0                          |N 还未测试                  |      3.0+      |
 | Spring-data-Es            | 2.1.14(3.1.17.RELEASE)         |Y                         |      1.8+       |
-| Spring-data-Neo4j         | 2.1.14(5.1.17.RELEASE)         |N 还未测试                  |      1.8+       |
+| Spring-data-Neo4j         | 2.1.14(5.1.17.RELEASE)         |N                         |      1.8+       |
 | Spring-Rabbit             | 2.1.14(2.1.14.RELEASE)         |Y                         |      无         |
 | Rabbit-Client             | 5.4.3                          |Y                         |      2.7+       |
 | Spring-Kafka              | 2.1.13                         |Y                         |      无         |
