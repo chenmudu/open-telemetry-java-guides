@@ -148,7 +148,7 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 | Jedis-Client              | 2.9.0                          |Y                         |      1.4+       |
 | Redisson-Client           | 0.0.0                          |N 还未测试                  |      3.0+      |
 | Spring-data-Es            | 2.1.14(3.1.17.RELEASE)         |Y                         |      1.8+       |
-| Spring-data-Neo4j         | 2.1.14(5.1.17.RELEASE)         |N                         |      1.8+       |
+| Spring-data-Neo4j         | 2.1.14(5.1.17.RELEASE)         |Y                         |      1.8+       |
 | Spring-Rabbit             | 2.1.14(2.1.14.RELEASE)         |Y                         |      无         |
 | Rabbit-Client             | 5.4.3                          |Y                         |      2.7+       |
 | Spring-Kafka              | 2.1.13                         |Y                         |      无         |
@@ -159,6 +159,6 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 
 - 单个服务应当部署单独的Otel-Agent去收集你的Logging、Trace、Metrics。
 
-- 在每条业务架设对应的Otel-Col-Gateway去做总收集较为妥当(划分依据参考自身业务)。
+- 在每条业务架设对应的Otel-Col-Gateway去做总线收集较为妥当(划分依据参考自身业务)。
 
 - 至于更大的集群模式，请自行尝试。暂时切莫用于生产，待官方发布GA版本，个人将预先尝试。

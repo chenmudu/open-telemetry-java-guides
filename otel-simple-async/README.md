@@ -1,6 +1,6 @@
 ### Open-Telemetry-Simple-Async 案例工程
 
-> Open-Telemetry-Simple-Async 实际测试了 异步方法 以及 定时任务。
+> Open-Telemetry-Simple-Async 实际测试了 异步方法 以及 定时任务 还有Otel对其他线程池的增强。
 
 ##### 测试模块快速开始
 

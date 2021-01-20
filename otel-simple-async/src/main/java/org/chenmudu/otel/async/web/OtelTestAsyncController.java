@@ -57,8 +57,8 @@ public class OtelTestAsyncController implements ApplicationContextAware {
     //        log.info("OtelTestAsyncController testCalledAsync thread name : {}", Thread.currentThread().getName());
     //        return "testCalledAsync";
     //    }
-
-    @Async
+    //@Async
+    @Async("cchenThreadExector")
     public String testCalledAsyncByProxy() {
         log.info("OtelTestAsyncController testCalledAsyncByProxy thread name : {}", Thread
             .currentThread().getName());

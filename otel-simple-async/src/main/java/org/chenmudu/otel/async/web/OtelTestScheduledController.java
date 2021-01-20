@@ -35,6 +35,7 @@ public class OtelTestScheduledController {
     @Scheduled(cron = "*/10 * * * * ?")
     public void pushDataScheduled() {
         log.info("start push data scheduled!");
+        log.info("current thread name is : {}", Thread.currentThread().getName());
         log.info("scheduled scheduled scheduled scheduled scheduled!!!!!");
         log.info("end push data scheduled!");
     }
