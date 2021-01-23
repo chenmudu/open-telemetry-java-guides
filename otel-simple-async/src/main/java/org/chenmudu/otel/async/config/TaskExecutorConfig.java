@@ -39,18 +39,14 @@ public class TaskExecutorConfig {
      * @see io.opentelemetry.javaagent.instrumentation.spring.core.SpringCoreInstrumentationModule
      * @see io.opentelemetry.javaagent.instrumentation.spring.core.SimpleAsyncTaskExecutorInstrumentation
      *
+     * note: 0.13.0 开始，均支持。
+     * @see io.opentelemetry.javaagent.instrumentation.javaconcurrent.AbstractExecutorInstrumentation#AbstractExecutorInstrumentation
+     *
+     *
      * @return
      */
 //    @Bean(name = "taskExecutor") find type == TaskExector and name.equals("taskExector")
 //    @Primary
-
-
-    /**
-     * 应当存在可以增强Runnable/Callable 的对应Api给开发者。
-     * otel-java provide api.
-     * otel-java-instrumentation enhance current api.
-     * @return
-     */
     @Bean(name = "cchenThreadExector")
     public ThreadPoolTaskExecutor taskExecutor(){
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
@@ -64,11 +60,9 @@ public class TaskExecutorConfig {
     class customizableThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
         @Override
         public void execute(Runnable task) {
-//            Runnable newTask = RunnableWrapper.wrapIfNeeded(task);
-            // if had runnable & callable api to create new trace context!!
             super.execute(task);
         }
-        //others override
+
     }
     /**
      * copy form DefaultThreadFactory.

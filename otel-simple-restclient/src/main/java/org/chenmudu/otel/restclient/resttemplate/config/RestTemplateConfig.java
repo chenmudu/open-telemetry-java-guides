@@ -15,11 +15,16 @@
  */
 package org.chenmudu.otel.restclient.resttemplate.config;
 
+import io.opentelemetry.api.trace.Tracer;
+import io.opentelemetry.instrumentation.spring.httpclients.RestTemplateInterceptor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
 
 /**
  *
@@ -29,8 +34,10 @@ import org.springframework.web.client.RestTemplate;
 public class RestTemplateConfig {
 
     @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
-        return restTemplateBuilder.build();
+    public RestTemplate restTemplate(@Nullable Tracer tracer) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new RestTemplateInterceptor(tracer));
+        return restTemplate;
     }
 
     @Bean

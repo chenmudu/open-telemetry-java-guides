@@ -105,9 +105,9 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 
 #### 测试环境
 
-- JDK Version: 1.8.0_171
+- JDK Version: 1.8.0_171 & Open-Jdk:11-2018.09.25
 
-- Otel Java Agent Version: 0.12.0
+- Otel Java Agent Version: 0.12.0 & 0.14.1
 
 - Otel Collector Win10 Version: 0.16.0
 
@@ -148,7 +148,7 @@ OTEL_RESOURCE_ATTRIBUTES=service.name=your service name
 | Jedis-Client              | 2.9.0                          |Y                         |      1.4+       |
 | Redisson-Client           | 0.0.0                          |N 还未测试                  |      3.0+      |
 | Spring-data-Es            | 2.1.14(3.1.17.RELEASE)         |Y                         |      1.8+       |
-| Spring-data-Neo4j         | 2.1.14(5.1.17.RELEASE)         |Y                         |      1.8+       |
+| Spring-data-Neo4j         | 2.1.14(5.1.17.RELEASE)         |N 还未测试                 |      1.8+       |
 | Spring-Rabbit             | 2.1.14(2.1.14.RELEASE)         |Y                         |      无         |
 | Rabbit-Client             | 5.4.3                          |Y                         |      2.7+       |
 | Spring-Kafka              | 2.1.13                         |Y                         |      无         |
