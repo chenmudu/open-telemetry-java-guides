@@ -53,13 +53,13 @@ public class OtelTestRestClientController {
     @GetMapping("/rest")
     public String rest() throws Exception {
         log.info("OtelTestRestClientController started!");
-//        httpClient();
-//        asyncHttpClient();
+        //        httpClient();
+        //        asyncHttpClient();
         restTemplate();
         asyncRestTemplate();
-//        connectionUrl();
-//        syncOkHttp();
-//        asyncOkHttp();
+        //        connectionUrl();
+        //        syncOkHttp();
+        //        asyncOkHttp();
         return "OtelTestRestClientController hello !";
     }
 

@@ -45,10 +45,10 @@ public class TaskExecutorConfig {
      *
      * @return
      */
-//    @Bean(name = "taskExecutor") find type == TaskExector and name.equals("taskExector")
-//    @Primary
+    //    @Bean(name = "taskExecutor") find type == TaskExector and name.equals("taskExector")
+    //    @Primary
     @Bean(name = "cchenThreadExector")
-    public ThreadPoolTaskExecutor taskExecutor(){
+    public ThreadPoolTaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setCorePoolSize(5);
         taskExecutor.setMaxPoolSize(20);
@@ -57,6 +57,7 @@ public class TaskExecutorConfig {
         taskExecutor.initialize();
         return taskExecutor;
     }
+
     class customizableThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
         @Override
         public void execute(Runnable task) {
@@ -64,6 +65,7 @@ public class TaskExecutorConfig {
         }
 
     }
+
     /**
      * copy form DefaultThreadFactory.
      * [88d49c5a4575e7763bed898862e01d22,dfd1279e70b0ef7a]- o.c.o.a.s.i.OtelTestAsyncServiceImpl.calledAsync:34
@@ -71,24 +73,19 @@ public class TaskExecutorConfig {
      */
     class CustomizableThreadFactory implements ThreadFactory {
 
-        private  final AtomicInteger poolNumber = new AtomicInteger(1);
-        private final ThreadGroup group;
+        private final AtomicInteger poolNumber   = new AtomicInteger(1);
+        private final ThreadGroup   group;
         private final AtomicInteger threadNumber = new AtomicInteger(1);
-        private final String namePrefix;
+        private final String        namePrefix;
 
         CustomizableThreadFactory() {
             SecurityManager s = System.getSecurityManager();
-            group = (s != null) ? s.getThreadGroup() :
-                    Thread.currentThread().getThreadGroup();
-            namePrefix = "cchen-pool-" +
-                    poolNumber.getAndIncrement() +
-                    "-thread-";
+            group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
+            namePrefix = "cchen-pool-" + poolNumber.getAndIncrement() + "-thread-";
         }
 
         public Thread newThread(Runnable r) {
-            Thread t = new Thread(group, r,
-                    namePrefix + threadNumber.getAndIncrement(),
-                    0);
+            Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
             if (t.isDaemon())
                 t.setDaemon(false);
             if (t.getPriority() != Thread.NORM_PRIORITY)
