@@ -15,6 +15,8 @@
  */
 package org.chenmudu.otel.kafka.consumer;
 
+import io.opentelemetry.instrumentation.annotations.SpanAttribute;
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 import lombok.extern.slf4j.Slf4j;
 import org.chenmudu.otel.kafka.common.CommonConstans;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -33,8 +35,53 @@ public class KafkaMqConsume {
      * @param content str msg.
      */
     @KafkaListener(topics = CommonConstans.TOPIC_NAME)
-    public void processMessage(String content) {
+    @WithSpan
+    // 随便
+    public void processMessage(@SpanAttribute("bizReciveParam") String content) {
         //consume message.
         log.info("KafkaMqConsume processMessage content msg : {}", content);
+        // biz core1
+        test21();
+        //biz core2
+        test22();
     }
+
+    @WithSpan
+    private void test21() {
+        test211();
+        test212();
+        test213();
+    }
+
+    @WithSpan
+    private void test211() {
+
+    }
+
+    @WithSpan
+    private void test212() {
+
+    }
+
+    @WithSpan
+    private void test213() {
+
+    }
+
+    @WithSpan
+    private void test22() {
+        test221();
+        test222();
+    }
+
+    @WithSpan
+    private void test221() {
+
+    }
+
+    @WithSpan
+    private void test222() {
+
+    }
+
 }

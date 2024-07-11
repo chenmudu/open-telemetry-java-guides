@@ -21,6 +21,7 @@ velocity.log
 logs
 .m2
 .mvn/
+*.jar
 
 # gradle related ignore in sub directories
 .gradle

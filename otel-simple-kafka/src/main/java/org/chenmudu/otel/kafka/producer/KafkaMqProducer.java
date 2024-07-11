@@ -15,6 +15,8 @@
  */
 package org.chenmudu.otel.kafka.producer;
 
+import io.opentelemetry.instrumentation.annotations.SpanAttribute;
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 import org.chenmudu.otel.kafka.common.CommonConstans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -34,6 +36,14 @@ public class KafkaMqProducer {
      * io.opentelemetry.auto.kafka-clients-0.11
      */
     public void sendMessage() {
-        template.send(CommonConstans.TOPIC_NAME, "hi, sofa tracer!");
+        final String msg = "hi, tracer";
+        template.send(CommonConstans.TOPIC_NAME, msg);
+
+        sayHi(msg);
+    }
+
+    @WithSpan
+    private void sayHi(@SpanAttribute("bizArg0001") final String bizArg1) {
+
     }
 }

@@ -27,4 +27,5 @@ public class WebMvcRunMain {
     public static void main(String[] args) {
         SpringApplication.run(WebMvcRunMain.class);
     }
+
 }

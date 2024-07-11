@@ -2,14 +2,26 @@
     <jmxConfigurator/>
     <property name="charset" value="UTF-8" />
     <property name="pattern"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] - [%X{traceId},%X{spanId}]- %logger{30}.%method:%line  %msg%n" />
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] - trace_id=%mdc{trace_id} span_id=%mdc{span_id} trace_flags=%mdc{trace_flags} %5p - %logger{30}.%method:%line  %msg%n" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${pattern}</pattern>
         </encoder>
     </appender>
+
+    <appender name="OpenTelemetry"
+              class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
+        <captureExperimentalAttributes>true</captureExperimentalAttributes>
+        <captureCodeAttributes>true</captureCodeAttributes>
+        <captureMarkerAttribute>true</captureMarkerAttribute>
+        <captureKeyValuePairAttributes>true</captureKeyValuePairAttributes>
+        <captureLoggerContext>true</captureLoggerContext>
+        <captureMdcAttributes>*</captureMdcAttributes>
+        <numLogsCapturedBeforeOtelInstall>10</numLogsCapturedBeforeOtelInstall>
+    </appender>
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
+        <appender-ref ref="OpenTelemetry"/>
     </root>
 </configuration>

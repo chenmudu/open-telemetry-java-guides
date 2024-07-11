@@ -21,5 +21,5 @@ package org.chenmudu.otel.kafka.common;
  */
 public class CommonConstans {
 
-    public static final String TOPIC_NAME = "otel-test-topic";
+    public static final String TOPIC_NAME = "test-topic";
 }

@@ -16,28 +16,54 @@
  */
 package org.chenmudu.otel.webmvc.controller;
 
-import io.opentelemetry.extension.annotations.WithSpan;
-import lombok.extern.slf4j.Slf4j;
+import ch.qos.logback.classic.Logger;
+import io.opentelemetry.instrumentation.annotations.SpanAttribute;
+import io.opentelemetry.instrumentation.annotations.WithSpan;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * SpringMvcTestController.
  */
-@Slf4j
+//@Slf4j
 @RestController
 public class OtelTestSpringMvcController {
+    private volatile long counter = 0;
+    private static Logger log     = (Logger) LoggerFactory
+                                      .getLogger(OtelTestSpringMvcController.class);
 
     @GetMapping("/webmvc")
     public String webmvc() {
-        log.info("OtelTestSpringMvcController webmvc started!");
+        counter++;
+        if (counter % 2 == 0) {
+            try {
+                final int i = 1 / 0;
+            } catch (Exception e) {
+                log.error("error by zero", e);
+                throw e;
+            }
+        }
+        log.info("OtelTestSpringMvcController webmvc!");
         this.calledHi();
+        if (counter > 100) {
+            counter = 0;
+        }
         return "OtelTestSpringMvcController hello !";
     }
 
-    @WithSpan(value = "testCalledHi")
+    @WithSpan(value = "biz1")
     private String calledHi() {
-        log.info("OtelTestSpringMvcController calledHi started!");
+        log.info("OtelTestSpringMvcController biz1!");
+        calledHi1("admin", "easipass");
         return "calledHi";
     }
+
+    @WithSpan(value = "biz2")
+    private String calledHi1(@SpanAttribute("username") final String username,
+                             @SpanAttribute("password") final String password) {
+        log.info("OtelTestSpringMvcController calledHi1 started!");
+        return "calledHi";
+    }
+
 }
