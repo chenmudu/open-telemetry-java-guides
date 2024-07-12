@@ -17,6 +17,10 @@
 package org.chenmudu.otel.webmvc.controller;
 
 import ch.qos.logback.classic.Logger;
+import io.opentelemetry.api.GlobalOpenTelemetry;
+import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.api.metrics.LongCounter;
+import io.opentelemetry.api.metrics.Meter;
 import io.opentelemetry.instrumentation.annotations.SpanAttribute;
 import io.opentelemetry.instrumentation.annotations.WithSpan;
 import org.slf4j.LoggerFactory;
@@ -32,11 +36,20 @@ public class OtelTestSpringMvcController {
     private volatile long counter = 0;
     private static Logger log     = (Logger) LoggerFactory
                                       .getLogger(OtelTestSpringMvcController.class);
+    private final Meter meter;
+
+    private final LongCounter longCounter;
+
+    {
+        meter = GlobalOpenTelemetry.get().getMeter(Class.class.getSimpleName());
+        longCounter = meter.counterBuilder("web_mvc_success_query_counter")
+                .setDescription("test").build();
+    }
 
     @GetMapping("/webmvc")
     public String webmvc() {
-        counter++;
-        if (counter % 2 == 0) {
+        this.counter++;
+        if (this.counter % 2 == 0) {
             try {
                 final int i = 1 / 0;
             } catch (Exception e) {
@@ -46,9 +59,10 @@ public class OtelTestSpringMvcController {
         }
         log.info("OtelTestSpringMvcController webmvc!");
         this.calledHi();
-        if (counter > 100) {
-            counter = 0;
+        if (this.counter > 100) {
+            this.counter = 0;
         }
+        longCounter.add(1L);
         return "OtelTestSpringMvcController hello !";
     }
 

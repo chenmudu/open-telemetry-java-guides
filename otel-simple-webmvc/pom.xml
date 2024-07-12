@@ -34,6 +34,7 @@
             <artifactId>opentelemetry-logback-appender-1.0</artifactId>
         </dependency>
 
+
     </dependencies>
 
 </project>

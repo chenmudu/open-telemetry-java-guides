@@ -1,0 +1,15 @@
+version: "2.4"
+
+services:
+  otel-demo:
+    image: cchen1996/otel-simple-webmvc-demo:0.0.2
+    container_name: otel-simple-webmvc
+    environment:
+      - OTEL.RESOURCE.ATTRIBUTES=service.name=otel-simple-webmvc，service.version=0.0.2
+      - OTEL.LOGS.EXPORTER=otlp
+      - OTEL.METRICS.EXPORTER=otlp
+      - OTEL.EXPORTER.OTLP.ENDPOINT=http://192.168.117.18:4317
+    restart: on-failure
+    ports:
+      - "10001:10001"
+
