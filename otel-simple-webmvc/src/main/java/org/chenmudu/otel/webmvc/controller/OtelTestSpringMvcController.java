@@ -18,7 +18,9 @@ package org.chenmudu.otel.webmvc.controller;
 
 import ch.qos.logback.classic.Logger;
 import io.opentelemetry.api.GlobalOpenTelemetry;
-import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.api.common.AttributeKey;
+import io.opentelemetry.api.common.Attributes;
+import io.opentelemetry.api.common.AttributesBuilder;
 import io.opentelemetry.api.metrics.LongCounter;
 import io.opentelemetry.api.metrics.Meter;
 import io.opentelemetry.instrumentation.annotations.SpanAttribute;
@@ -27,6 +29,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static io.opentelemetry.api.common.AttributeKey.stringKey;
+
 /**
  * SpringMvcTestController.
  */
@@ -34,26 +38,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OtelTestSpringMvcController {
     private volatile long counter = 0;
+
     private static Logger log     = (Logger) LoggerFactory
                                       .getLogger(OtelTestSpringMvcController.class);
     private final Meter meter;
 
     private final LongCounter longCounter;
 
+    private Attributes attributes = Attributes.of(
+                                            stringKey("env"), "dev",
+                                            stringKey("author"), "cchen",
+                                            stringKey("service"), "otel-simple-webmvc"
+                                    );
+
     {
         meter = GlobalOpenTelemetry.get().getMeter(Class.class.getSimpleName());
-        longCounter = meter.counterBuilder("web_mvc_success_query_counter")
-                .setDescription("test").build();
+        longCounter = meter.counterBuilder("web_mvc_query_counter")
+                .setDescription("test for current metric").build();
     }
 
     @GetMapping("/webmvc")
     public String webmvc() {
+        boolean flag = false;
         this.counter++;
         if (this.counter % 2 == 0) {
             try {
                 final int i = 1 / 0;
             } catch (Exception e) {
                 log.error("error by zero", e);
+                longCounter.add(1, attributes.toBuilder().put(String.valueOf(stringKey("success")), flag).build());
                 throw e;
             }
         }
@@ -62,7 +75,8 @@ public class OtelTestSpringMvcController {
         if (this.counter > 100) {
             this.counter = 0;
         }
-        longCounter.add(1L);
+        flag = true;
+        longCounter.add(1L, attributes.toBuilder().put(String.valueOf(stringKey("success")), flag).build());
         return "OtelTestSpringMvcController hello !";
     }
 
